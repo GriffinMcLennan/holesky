@@ -6,6 +6,7 @@ import { useBalance, useDisconnect } from "wagmi";
 import connectedStyles from "./Connected.module.css";
 import { Button } from "@components/Button";
 import { useRefetchBalances } from "@hooks/useRefetchBalances";
+import { SuccessfulTransfer } from "@components/SuccessfulTransfer";
 
 interface ConnectedProps {
   address: Address;
@@ -34,19 +35,7 @@ export const Connected: FC<ConnectedProps> = ({ address }) => {
         <Button title="Disconnect" onClick={disconnect} />
       </div>
 
-      {isConfirmed && (
-        <>
-          <p>Transfer Succeeded!</p>
-          <p
-            className={connectedStyles.explorerText}
-            onClick={() =>
-              window.open(`https://holesky.etherscan.io/tx/${hash}`, "_blank")
-            }
-          >
-            View on Explorer
-          </p>
-        </>
-      )}
+      <SuccessfulTransfer hash={hash} isConfirmed={isConfirmed} />
     </>
   );
 };

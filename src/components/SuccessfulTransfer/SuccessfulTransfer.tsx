@@ -5,9 +5,17 @@ import { EXPLORER_BASE_URL } from "../../constants";
 
 interface SuccessfulTransferProps {
   hash: Address | undefined;
+  isConfirmed: boolean;
 }
 
-export const SuccessfulTransfer: FC<SuccessfulTransferProps> = ({ hash }) => {
+export const SuccessfulTransfer: FC<SuccessfulTransferProps> = ({
+  hash,
+  isConfirmed,
+}) => {
+  if (!isConfirmed) {
+    return null;
+  }
+
   return (
     <>
       <p>Transfer Succeeded!</p>
